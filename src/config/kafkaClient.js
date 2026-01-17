@@ -1,8 +1,11 @@
-const { Kafka } = require("kafkajs");
+const { Kafka, logLevel } = require("kafkajs");
 
+
+// First run kafka on docker
 const kafkaClient = new Kafka({
   clientId: "my-kafka-app",
-  brokers: ["kafka1:9092", "kafka2:9092"],
+  brokers: ["localhost:9092"],
+  logLevel: logLevel.ERROR
 });
 
 module.exports = kafkaClient;

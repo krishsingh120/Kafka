@@ -2,13 +2,18 @@ const kafkaClient = require("../config/kafkaClient");
 
 const producer = kafkaClient.producer();
 
-await producer.connect();
-await producer.send({
-  topic: "test-topic",
-  messages: [
-    { value: "Hello KafkaJS user!" },
-    { value: "Hello this msg from kafka producer side!" },
-  ],
-});
+const addProducer = async (msgPayload) => {
+  await producer.connect();
+  console.log("kafka producer connected");
 
-await producer.disconnect();
+  await producer.send({
+    topic: "test-topic",
+    messages: msgPayload,
+  });
+
+  console.log("kafka producer added successfully!");
+
+  // await producer.disconnect();
+};
+
+module.exports = addProducer;
